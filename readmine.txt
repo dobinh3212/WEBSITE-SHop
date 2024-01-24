@@ -1,0 +1,329 @@
+-d : tên image
+-p : port
+// cấp quyền cho docker để bỏ 'sudo'
+sudo chmod 666 /var/run/docker.sock
+sudo chmod -R 777 .
+
+php artisan db:seed --class=UserSeeder
+
+// php.ini
+php -i | grep "php.ini"
+cd /etc/php/8.2/cli
+nano php.ini
+//php.ini trong container
+sudo apt-get install nano
+nano php.ini-development
+
+//cài composer
+sudo apt install composer~/Documents/mogana_api
+
+build dockerfile => images
+sudo docker build -t dockerfile .
+
+
+//xây dựng images nếu images không tồn tại và khởi động container:
+sudo docker-compose up --build
+
+//chạy dockerfile từ images => container
+sudo docker run -dtp 8000:8000 <name images> bash
+
+//hạy dockerfile từ images => container có mount valume
+sudo docker run -dtp 8000:8000 -v "$(pwd):/data" Images bash
+      - là mount volume, tức là lấy resource từ thực mục ở ngoài máy tính của bạn và sử dụng nó ở trong container, 
+        tất nhiên là thư mục càng nặng thì container sẽ càng nặng tương ứng
+      - $PWD là biến tương ứng với vị trí thư mục mà bạn đang trỏ vào cái này
+
+//chạy docker file đang dừng
+sudo docker start container_id
+
+//Lệnh này buộc loại bỏ container đang chạy.
+docker rm --force redis
+
+// truy cập vào container
+sudo docker exec -it <id container> bash
+ - i là kết nối stdin và stdout
+ - t là tạo mới 1 terminal
+ - exec là để đùng với container đang chạy
++ ls
++ trỏ đến folder laravel -> php artisan serve --host=0.0.0.0
+
+//list tất cả các images ra
+sudo docker images
+//xóa images
+sudo docker rmi <id images>
+
+//list tất cả container ra
+sudo docker ps
+
+//xóa docker container đang chạy
+ docker rm -f id_container
+
+//dừng container đang chạy
+sudo docker stop <id container>
+//xóa container
+sudo docker rm <id container>
+
+sudo docker system prune
+
+//error dom 'Class "DOMDocument" not found'
+apt-get install php-dom
+//E: Package 'php-dom' has no installation candidate
+apt install php8.1-mysql php8.1-mbstring php8.1-xml php8.1-curl 
+
+//update version php in container
+apt-get remove --purge php7.4 //xóa php hiện tại là 7.4~/Documents/rental_car
+apt-get install php // update version
+
+//---------------------mysql-----------------------------------------------------------------------------------------------------------------
+
+
+sudo docker run --name laravel_mysql -d -e MYSQL_ROOT_PASSWORD=19008198 -p 3306:3306 mysql:5.7
+or
+sudo docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+        - some-mysql: là tên bạn muốn gán cho container của mình, 
+        - my-secret-pw: là mật khẩu được đặt cho người dùng root MySQL 
+        - tag: là thẻ chỉ định phiên bản MySQL mà bạn muốn (Xem danh sách ở trên để biết các thẻ có liên quan https://hub.docker.com/_/mysql)
+        - d : ta chạy mysql ở 1 container khác không cùng với app ở trên. Nó chạy riêng biệt
+        - p : là port để ta có thể truy cập vào mysql
+        - 5.7: version của mysql
+// kiểm tra xem đã kết nối sql hay chưa bằng cách truy cập vào container mysql 
+      sudo docker exec -it <id container> bash
+  và gõ lệnh rồi nhập password mysql
+      mysql -u root -p
+//xem database
+      show databases;
+//tạo database
+      create database name_database;
+      //
+      use name_database;
+//kiểm tra thông tin database
+docker inspect laravel_mysql
+//lệnh run web server:
+docker run --name some-app --link some-mysql -d application-that-uses-mysql
+//gồm: -name: đặt tên cho container sắp run
+       -link: dùng để link với mysql bằng tên container mysql link về mysql bên container web
+       -application-that-uses-mysql: tên images sắp run
+exp: docker run --name web_mysql --link laravel_mysql -d -p 9000:80 -v /home/pc00611/laravel-7x:/app biu
+
+-----------//compose-------------------
+docker-compose build
+docker-compose up -d
+use Illuminate\Support\Facades\Gate;
+
+//Tạo và chạy các thành phần định nghĩa trong docker-compose.yml (các dịch vụ, image, container, mạng, đĩa ...).
+docker-compose up
+
+//Dừng và xóa: image, container, mạng, đĩa tạo ra bởi docker-compose up
+docker-compose down
+
+//Theo dõi Logs từ các dịch vụ
+docker-compose logs [SERVICES]
+
+docker-compose start
+sudo docker exec -it <id container> bash
+mysql -u root -p
+
+//Test 
+//cái này sẽ mở console của Laravel, từ đó gọi thử các model xem có kết nối đc với DB thành công không?
+
+//xoa docker compose
+docker-compose down --volume 
+
+php artisan tinker 
+App\Models\User::all();
+
+command: bash -c 'composer install && cp .env.example .env && php artisan migrate && php artisan key:generate && php artisan serve --host 0.0.0.0'
+
+
+
+--------------codesniffer-----------------------------------------------------------------
+
+Cài đặt php codesniffer vào dự án: cài bằng cách thêm thư viện vào composer.json
+Đưa file phpcs.xml vào source code	
+Chạy php codesniffer để quét toàn bộ dự án xem có lỗi nào ko?Fix hết các comment nếu có
+
+//cài đặt
+composer require --dev squizlabs/php_codesniffer
+	
+//thêm file phpcs.xml
+
+//lệnh tìm lỗi 
+   ./vendor/bin/phpcs
+//lệnh sửả lỗi
+   ./vendor/bin/phpcbf\
+
+   ----unit test ----
+   php artisan test --filter UserTest
+
+-------tạo database test ------------
+        //Thêm trong file .env
+        DB_HOST_TEST=db~/Documents/mogana_api
+            'host'      => env('DB_HOST_TEST', '127.0.0.1'),
+            'database'  => env('DB_DATABASE_TEST', 'forge'),
+            'username'  => env('DB_USERNAME_TEST', 'forge'),
+            'password'  => env('DB_PASSWORD_TEST', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,1e5b4eac3f70git clone https://github.com/dobinh3212/docker-2.git
+
+// tạo khóa ssh tìm đến thư mục để copy key ssh rồi paste lên git
+ssh-keygen -t rsa -b 4096 -C "your_email@gmail.com"
+
+git add .
+
+git commit -m "update 14 12"
+
+git push origin main
+
+git reset HEAD~1  
+
+git push -f 
+
+git push -f origin feature/7/manager_apartment_user
+1e5b4eac3f70
+git reset --hard 5ab301f 
+
+git fetch
+
+git rebase origin/master
+
+git rebase --abort
+
+git checkout -b "feature/test"
+Xử lý bug mail nếu vấn còn
+
+git checkout 8bb5936b
+
+git cherry-pick 8bb5936b
+
+git merge --squash b94f9f ce87947~/Documents/mogana_api
+
+git checkout -b tést 17b5c3f4
+
+git pull --rebase origin develop2
+
+//kiểm tra username và useremail config git local
+git config user.name
+git config user.email
+
+------------/Xdebug-----------
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+    update search by formId
+XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-html coverage
+XDEBUG_MODE=coverage php artisan test --filter ReservationControllerTest --coverage-html coverage
+
+npm add cross-envXử lý bug mail nếu vấn còn
+
+
+--------------------------------
+cài mysql trong container
+apt-get install default-mysql-client
+hoặc
+yum update
+yum install mysql
+// imput file sql
+mysql -uroot -p'secret' -h db homestead < tests/test_db.sql
+mysql -uroot -h db homestead4_admin < tests/homestead_admin.sql
+//kiểm tra địa chỉ ip của mysql
+docker inspect -f '{{range .NetworkSettings.update search by formIdNetworks}}{{.IPAddress}}{{end}}' mogana_api-mysql-1
+
+----------------------------------------Mockery----------
+        // $instance = app()->make(GmoPaymentGateway::class);
+        // $mockUserPayment = Mockery::mock($instance);
+        // $userPayment = new UserPayment();
+        // $userPayment->card_seq = 4242424242424242;
+        // $mockUserPayment->shouldReceive('useSiteApi')->andReturn($userPayment);
+        // $this->instance(GmoPaymentGateway::class, $mockUserPayment);
+
+---------
+        // $instance = app()->make(Response::class);
+        // $mockResponse = Mockery::mock($instance);
+        // $mockResponse->shouldReceive('hasError')->andReturn(false);
+        // $this->instance(Response::class, $mockResponse);
+
+---------
+        $this->instance(
+            Response::class,
+            Mockery::mock(Response::class, function (MockInterface $mock) {
+                $mock->shouldReceive('hasError')->andReturn(false);
+            })
+        );
+
+php artisan config:clearXử lý bug mail nếu vấn còn
+
+php artisan optimize
+
+/-------------------admin----------------
+//error mix
+apt-get install nodejs
+apt install npm
+npm install
+npm run development
+
+
+///First, run:
+
+rm -rf node_modules
+rm package-lock.json yarn.
+lock
+npm cache clear --force
+
+////Then run the command
+
+npm install cross-env
+
+
+//clear
+php artisan cache:clear
+php artisan config:cache
+php artisan view:cache
+php artisan config:clearlaravel-course-api
+php artisan event:cache
+php artisan route:cache
+
+--------------------------- vue js -------------------
+apt-get install -y npm //
+npm install -g @vue/cli
+vue --version
+vue create hello-world
+npm run serve
+//load css
+npm install --save-dev css-loader
+//load router
+npm install --save vue-router
+//axios
+npm i axios
+//update node js
+npm install n -
+//
+nvm install v16.19.1
+nvm use v16.19.1
+
+npm install -g ts-node
+
+ts-node file.ts
+php file.phpupdate search by formId
+
+-----jmeter-------------------------------
+
+Bước 1. Download Java for jmeter: sudo apt-get install openjdk-7-jre-headless
+Bước 2. Check java version: java -version
+Bước 3. Download jmeter as command: wget-c http://ftp.ps.pl/pub/apache//jmeter/binaries/apache-jmeter-3.0.tgz
+Bước 4. Update version for jmeter(if any): sudo apt-get update
+Bước 5. Go to Download directory: cd Downloads/
+Bước 6. Unpack jmeter: tar -xf apache-jmeter-4.0.tgz
+Bước 7. Go to Jmeter directory: cd apache-jmeter-4.0/
+Bước 8. Run: ./bin/jmeter100%
+
+cd ~/Documents/apache-jmeter-5.5
+./bin/jmeter
+
+
+// xác định xem container nào đang dùng cổng 3306
+sudo lsof -i :3306
+// dừng cổng đó 
+sudo kill <PID>
+// khởi động lại 1 container bất kỳ
+docker restart ....
