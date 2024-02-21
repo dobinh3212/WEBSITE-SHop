@@ -107,7 +107,6 @@
               <th width="35%">Tên sản phẩm</th>
               <th width="110px;">Hình ảnh</th>
               <th>Giá bán</th>
-              <th>Màu / Bộ Nhớ</th>
               <th>Số lượng</th>
               <th>Tổng tiền</th>
             </tr>
@@ -123,7 +122,6 @@
                 @endif
               </td>
               <td style="text-align:center;">{{ number_format($key->price , 0, ',','.') }} <sup> đ</sup></td>
-              <td style="text-align:center;">{{ $key->color }} - {{ $key->memory }}</td>
               <td style="text-align:center;">{{  number_format($key->qty) }}</td>
               <td>{{ number_format($key->total , 0 ,',','.' ) }} <sup> đ</sup></td>
             </tr>

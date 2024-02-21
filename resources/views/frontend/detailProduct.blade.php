@@ -113,13 +113,6 @@
                                         <h4 style="color:black;"><b>Trạng Thái : </b>  {!! ($product->stock > 0)?'<span class="badge" style="background: #33ff00;color: black;font-size: 13px;">Còn hàng</span>':'<span class="badge" style="background: #ff0000;color: black;font-size: 13px;">Hết Hàng</span>' !!}</span>
                                         </h4>
                                         <h4 style="color:black;padding-top: 5px;"><b>Thương Hiệu : </b> <span> {{ ($product->brand ) ? $product->brand->name : 'Khác' }} </span></h4>
-                                        @if($product->color)
-                                            <h4><b>Màu : </b> <span>{{ $product->color }}</span></h4>
-                                        @endif
-
-                                        @if($product->memory)
-                                            <h4><b>Bộ Nhớ : </b> <span>{{ $product->memory }}</span></h4>
-                                        @endif
 
                                         <div class="product-wid-price">
 

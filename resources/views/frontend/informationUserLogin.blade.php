@@ -190,8 +190,6 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     {{ $val->name }}
-                                                                                    {!! ($val->color)?" <br><b>Màu</b> : $val->color":''; !!}
-                                                                                    {!! ($val->memory)?" <br><b>Bộ Nhớ</b> : $val->memory ":''; !!}
                                                                                 </td>
                                                                                 <td>{{ $val->qty }}</td>
                                                                                 <td>{{ number_format($val->price , 0 , ',' , '.')  }}<sup>đ</sup></td>

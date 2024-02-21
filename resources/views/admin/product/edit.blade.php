@@ -307,14 +307,6 @@
                                         <input type="text" class="form-control" id="color" name="color" placeholder="null" value="{{ $product->color }}">
                                     </div>
                                 </div>
-                                <!-- /.col-lg-6 -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Bộ Nhớ :</label>
-                                        <input type="text" class="form-control" id="memory" name="memory" placeholder="null" value="{{ $product->memory }}">
-                                    </div>
-                                </div>
-                                <!-- /.col-lg-6 -->
                             </div>
 
                             <div class="form-group">

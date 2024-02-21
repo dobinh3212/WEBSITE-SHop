@@ -87,16 +87,6 @@
                                                 <h4 class="cart-product-description">
                                                     <a href="{{ route('details.products',[ 'slug' => $key->options->slug ]) }}">{{ $key->name }}</a>
                                                 </h4>
-                                                <div class="cart-product-info">
-                                                    @if($key->options->color)
-                                                        <p><b>Màu : </b> <span>{{ $key->options->color }}</span></p>
-                                                    @endif
-
-                                                    @if($key->options->memory)
-                                                        <p><b>Bộ Nhớ : </b> <span>{{ $key->options->memory }}</span></p>
-                                                    @endif
-
-                                                </div>
                                             </div>
                                         </td>
 

@@ -277,12 +277,6 @@
                                     </div>
                                 </div>
                                 <!-- /.col-lg-6 -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Bộ Nhớ :</label>
-                                        <input type="text" class="form-control" id="memory" name="memory" placeholder="null">
-                                    </div>
-                                </div>
                                 <!-- /.col-lg-6 -->
                             </div>
                             <div class="form-group">
