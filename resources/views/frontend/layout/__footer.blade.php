@@ -1,38 +1,4 @@
 <footer class="entire_footer">
-    <!-- FOOTER-TOP-AREA -->
-    <div class="footer_top_area  footer-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="top-border"></div>
-                </div>
-                <div class="col-sm-4 col-sm-4 col-xs-12">
-                    <div class="footer_top_single">
-                        <i class="fa fa-plane"></i>
-                        <h4>Free Shipping on order over $1000</h4>
-                        <p>It's time to meet the Muppets on the Muppet Show tonight. And we know Flipper.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-sm-4 col-xs-12">
-                    <div class="footer_top_single">
-                        <i class="fa fa-gift"></i>
-                        <h4>unlimited gifts on every order</h4>
-                        <p>It's time to meet the Muppets on the Muppet Show tonight. And we know Flipper.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-sm-4 col-xs-12">
-                    <div class="footer_top_single">
-                        <i class="fa fa-exchange"></i>
-                        <h4>100% money back guarantee</h4>
-                        <p>It's time to meet the Muppets on the Muppet Show tonight. And we know Flipper.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FOOTER-TOP-AREA:END -->
-
-    <!-- FOOTER-WIDGET-AREA -->
     <div class="footer-widget">
         <div class="ovelay">
             <div class="container">
