@@ -61,27 +61,6 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-9 col-md-9 col-xs-12">
-                    <div class="search-area">
-
-
-                        <form action="{{ route('shop.search') }}" method="get" autocomplete="off">
-                            <div class="content-search">
-                                <input class="search-field" name="query" id="search-product" placeholder="Search here..." />
-                                <button class="search-button"{{--  href="#" --}}></button>
-                            </div>
-                        </form>
-                        <div class="results-box" >
-
-                        </div>
-
-                    </div>
-                    <div class="logo_right">
-                        <span><i class="fa fa-phone"></i></span>
-                        <a href="tel:+{{ $setting->hotline }}">CALL US FREE
-                            <br/>{{ $setting->hotline }}</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

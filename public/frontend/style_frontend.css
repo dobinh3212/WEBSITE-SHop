@@ -665,7 +665,7 @@ ol {
 }
 
 .categories {
-    background: #F89D18;
+    background: #000000;
     padding: 1px 0px;
 }
 
@@ -2682,7 +2682,7 @@ input[type="radio"], input[type="checkbox"] {
 /*  About-breadcrumb  */
 
 .title-breadcrumb {
-    background: #5A5F65;
+    background: #9aad6e;
 }
 
 .bred-title h3 {
@@ -2694,7 +2694,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .breadcrumb {
-    background: #5A5F65;
+    background: #9aad6e;
     float: right;
     border-radius: 0px;
     list-style: none;
